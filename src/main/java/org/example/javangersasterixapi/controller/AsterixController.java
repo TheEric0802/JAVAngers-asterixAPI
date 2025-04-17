@@ -2,7 +2,6 @@ package org.example.javangersasterixapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.javangersasterixapi.model.AsterixCharacter;
-import org.example.javangersasterixapi.repository.AsterixCharacterRepo;
 import org.example.javangersasterixapi.service.AsterixService;
 import org.springframework.web.bind.annotation.*;
 
