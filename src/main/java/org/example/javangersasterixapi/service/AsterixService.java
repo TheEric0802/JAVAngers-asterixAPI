@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Service @RequiredArgsConstructor
@@ -36,16 +35,16 @@ public class AsterixService {
         repo.save(new AsterixCharacter(idService.randomID(), character.getName(), character.getAge(), character.getProfession()));
     }
 
-    public void updateCharacter(String id, Map<String, Object> requestBody) throws NoSuchElementException {
+    public void updateCharacter(String id, AsterixCharacterDTO characterDTO) throws NoSuchElementException {
         AsterixCharacter character = repo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ID " + id + " not found"));
-        if (requestBody.containsKey("name")) {
-            character.setName((String) requestBody.get("name"));
+        if (characterDTO.getName() != null) {
+            character.setName(characterDTO.getName());
         }
-        if (requestBody.containsKey("age")) {
-            character.setAge((int) requestBody.get("age"));
+        if (characterDTO.getAge() != null) {
+            character.setAge(characterDTO.getAge());
         }
-        if (requestBody.containsKey("profession")) {
-            character.setProfession((String) requestBody.get("profession"));
+        if (characterDTO.getProfession() != null) {
+            character.setProfession(characterDTO.getProfession());
         }
         repo.save(character);
     }

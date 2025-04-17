@@ -7,6 +7,6 @@ import lombok.Data;
 public class AsterixCharacterDTO {
 
     String name;
-    int age;
+    Integer age;
     String profession;
 }

@@ -33,8 +33,8 @@ public class AsterixController {
     }
 
     @PutMapping("/{id}")
-    public void updateCharacter(@PathVariable String id, @RequestBody Map<String, Object> requestBody) {
-        service.updateCharacter(id, requestBody);
+    public void updateCharacter(@PathVariable String id, @RequestBody AsterixCharacterDTO character) {
+        service.updateCharacter(id, character);
     }
 
     @DeleteMapping("/{id}")
