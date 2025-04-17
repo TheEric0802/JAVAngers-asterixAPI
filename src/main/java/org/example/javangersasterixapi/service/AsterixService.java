@@ -18,8 +18,12 @@ public class AsterixService {
     private final AsterixCharacterRepo repo;
     private final IdService idService;
 
-    public List<AsterixCharacter> getCharacters() {
-        return repo.findAll();
+    public List<AsterixCharacter> getCharacters(Integer age) {
+        List<AsterixCharacter> result = repo.findAll();
+        if (age != null) {
+            result = result.stream().filter(character -> character.getAge() == age).toList();
+        }
+        return result;
     }
 
     public AsterixCharacter getCharacterById(String id) {
