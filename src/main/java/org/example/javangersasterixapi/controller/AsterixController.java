@@ -3,6 +3,7 @@ package org.example.javangersasterixapi.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.javangersasterixapi.model.AsterixCharacter;
 import org.example.javangersasterixapi.repository.AsterixCharacterRepo;
+import org.example.javangersasterixapi.service.AsterixService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,30 +14,30 @@ import java.util.List;
 @RequestMapping("/asterix/characters")
 public class AsterixController {
 
-    private final AsterixCharacterRepo repo;
+    private final AsterixService service;
 
     @GetMapping
     public List<AsterixCharacter> getCharacters() {
-        return repo.findAll();
+        return service.getCharacters();
     }
 
     @GetMapping("/{id}")
     public AsterixCharacter getCharacterById(@PathVariable String id) {
-        return repo.findById(id).orElse(null);
+        return service.getCharacterById(id);
     }
 
     @PostMapping
     public void addCharacter(@RequestBody AsterixCharacter character) {
-        repo.save(character);
+        service.addCharacter(character);
     }
 
     @PutMapping
     public void updateCharacter(@RequestBody AsterixCharacter character) {
-        repo.save(character);
+        service.updateCharacter(character);
     }
 
     @DeleteMapping("/{id}")
     public void deleteCharacter(@PathVariable String id) {
-        repo.deleteById(id);
+        service.deleteCharacter(id);
     }
 }
