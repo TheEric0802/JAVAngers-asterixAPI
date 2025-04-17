@@ -19,9 +19,11 @@ public class AsterixService {
     private final IdService idService;
 
     public List<AsterixCharacter> getCharacters(Integer age) {
-        List<AsterixCharacter> result = repo.findAll();
+        List<AsterixCharacter> result;
         if (age != null) {
-            result = result.stream().filter(character -> character.getAge() == age).toList();
+            result = repo.findAllByAgeIsLessThanEqual(age);
+        } else {
+            result = repo.findAll();
         }
         return result;
     }
