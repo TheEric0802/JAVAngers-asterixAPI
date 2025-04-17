@@ -22,8 +22,8 @@ public class AsterixService {
         return repo.findById(id).orElse(null);
     }
 
-    public void addCharacter(AsterixCharacter character) {
-        repo.save(character);
+    public void addCharacter(AsterixCharacterDTO character) {
+        repo.save(new AsterixCharacter(idService.randomID(), character.getName(), character.getAge(), character.getProfession()));
     }
 
     public void updateCharacter(AsterixCharacter character) {

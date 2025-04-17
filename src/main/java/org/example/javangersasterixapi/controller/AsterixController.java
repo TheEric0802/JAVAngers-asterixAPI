@@ -1,6 +1,7 @@
 package org.example.javangersasterixapi.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.javangersasterixapi.dto.AsterixCharacterDTO;
 import org.example.javangersasterixapi.model.AsterixCharacter;
 import org.example.javangersasterixapi.service.AsterixService;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class AsterixController {
     }
 
     @PostMapping
-    public void addCharacter(@RequestBody AsterixCharacter character) {
+    public void addCharacter(@RequestBody AsterixCharacterDTO character) {
         service.addCharacter(character);
     }
 
