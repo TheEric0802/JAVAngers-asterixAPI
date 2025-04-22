@@ -31,11 +31,13 @@ public class AsterixService {
         return repo.findById(id).orElse(null);
     }
 
-    public void addCharacter(AsterixCharacterDTO character) {
-        repo.save(new AsterixCharacter(idService.randomID(), character.getName(), character.getAge(), character.getProfession()));
+    public AsterixCharacter addCharacter(AsterixCharacterDTO character) {
+        AsterixCharacter newCharacter = new AsterixCharacter(idService.randomID(), character.getName(), character.getAge(), character.getProfession());
+        repo.save(newCharacter);
+        return newCharacter;
     }
 
-    public void updateCharacter(String id, AsterixCharacterDTO characterDTO) throws NoSuchElementException {
+    public AsterixCharacter updateCharacter(String id, AsterixCharacterDTO characterDTO) throws NoSuchElementException {
         AsterixCharacter character = repo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ID " + id + " not found"));
         if (characterDTO.getName() != null) {
             character.setName(characterDTO.getName());
@@ -47,6 +49,7 @@ public class AsterixService {
             character.setProfession(characterDTO.getProfession());
         }
         repo.save(character);
+        return character;
     }
 
     public void deleteCharacter(String id) {

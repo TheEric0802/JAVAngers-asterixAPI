@@ -7,7 +7,6 @@ import org.example.javangersasterixapi.service.AsterixService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 
@@ -28,13 +27,13 @@ public class AsterixController {
     }
 
     @PostMapping
-    public void addCharacter(@RequestBody AsterixCharacterDTO character) {
-        service.addCharacter(character);
+    public AsterixCharacter addCharacter(@RequestBody AsterixCharacterDTO character) {
+        return service.addCharacter(character);
     }
 
     @PutMapping("/{id}")
-    public void updateCharacter(@PathVariable String id, @RequestBody AsterixCharacterDTO character) {
-        service.updateCharacter(id, character);
+    public AsterixCharacter updateCharacter(@PathVariable String id, @RequestBody AsterixCharacterDTO character) {
+        return service.updateCharacter(id, character);
     }
 
     @DeleteMapping("/{id}")
