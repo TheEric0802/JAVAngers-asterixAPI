@@ -58,11 +58,27 @@ class AsterixServiceTest {
     }
 
     @Test
-    void deleteCharacter() {
+    void deleteCharacter_shouldUseDeleteById() {
         AsterixCharacterRepo repo = Mockito.mock(AsterixCharacterRepo.class);
         IdService idService = Mockito.mock(IdService.class);
         AsterixService service = new AsterixService(repo, idService);
         service.deleteCharacter("id");
         Mockito.verify(repo).deleteById("id");
+    }
+
+    @Test
+    void addCharacter_shouldReturnCharacter() {
+        AsterixCharacterRepo repo = Mockito.mock(AsterixCharacterRepo.class);
+        IdService idService = Mockito.mock(IdService.class);
+        AsterixService service = new AsterixService(repo, idService);
+        Mockito.when(idService.randomID()).thenReturn("id");
+
+        AsterixCharacter actual = service.addCharacter(new AsterixCharacterDTO("name", 5, "profession"));
+
+        AsterixCharacter expected = new AsterixCharacter("id", "name", 5, "profession");
+
+        assertEquals(expected, actual);
+        Mockito.verify(repo).save(expected);
+
     }
 }
